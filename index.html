@@ -385,6 +385,8 @@
             });
     </script>
     <script>
+        let downloadHidden = false;
+
         // Timer
         fetch('timer.json?' + Date.now())
             .then(r => r.json())
@@ -413,7 +415,7 @@
                             timerBanner.style.display = 'none';
 
                             // Show download button when timer ends
-                            if (timerData.hideDownload) {
+                            if (timerData.hideDownload && !downloadHidden) {
                                 document.querySelector('.download-section').style.display = '';
                                 document.querySelector('.btn-main').textContent = currentLang === 'ru' ? 'скачать APK ↓' : 'download APK ↓';
                                 document.querySelector('.btn-main').href = '#download';
@@ -462,6 +464,7 @@
 
                     // Hide download button when timer active
                     if (timerData.hideDownload) {
+                        downloadHidden = true;
                         document.querySelector('.download-section').style.display = 'none';
                         document.querySelector('.btn-main').textContent = currentLang === 'ru' ? 'игра ещё не вышла' : 'game not released yet';
                         document.querySelector('.btn-main').href = '#';
@@ -492,6 +495,7 @@
                 }
 
                 if (data && data.gameNotReleased) {
+                    downloadHidden = true;
                     document.querySelector('.download-section').style.display = 'none';
                     const btnMain = document.querySelector('.btn-main');
                     btnMain.textContent = currentLang === 'ru' ? 'игра ещё не вышла' : 'game not released yet';
