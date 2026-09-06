@@ -1,7 +1,7 @@
 {
     "title": "выход игры",
-    "date": "2026-09-06T09:37",
+    "date": "2026-09-06T09:58",
     "desc": "ну все пизда",
-    "countdownOnly": true,
-    "hideDownload": false
+    "countdownOnly": false,
+    "hideDownload": true
 }
