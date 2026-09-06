@@ -498,13 +498,6 @@
                     btnMain.href = '#';
                     btnMain.style.pointerEvents = 'none';
                     btnMain.style.opacity = '0.5';
-                } else {
-                    document.querySelector('.download-section').style.display = '';
-                    const btnMain = document.querySelector('.btn-main');
-                    btnMain.textContent = 'скачать APK ↓';
-                    btnMain.href = '#download';
-                    btnMain.style.pointerEvents = '';
-                    btnMain.style.opacity = '';
                 }
             })
             .catch(() => {});
