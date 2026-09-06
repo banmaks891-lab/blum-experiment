@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админка — Blum Experiment</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="radio-page">
+    <div class="radio-container" style="max-width: 500px;">
+        <a href="index.html" class="back-link">← назад на сайт</a>
+
+        <div style="background: rgba(220, 38, 38, 0.1); border: 1px solid rgba(220, 38, 38, 0.3); border-radius: 8px; padding: 16px; margin-bottom: 24px; text-align: center;">
+            <div style="font-family: 'Press Start 2P', monospace; font-size: 0.6rem; color: #dc2626; margin-bottom: 8px;">⚠ ВНИМАНИЕ</div>
+            <div style="font-size: 0.8rem; color: #999;">Сейчас ещё ничего не готово. Не заходите сюда!</div>
+        </div>
+
+        <div class="radio-box">
+            <h2 style="font-family: 'Press Start 2P', monospace; font-size: 0.9rem; margin-bottom: 24px; color: var(--blue);">НОВОСТИ</h2>
+
+            <div id="newsList" style="margin-bottom: 24px;">
+                <p style="color: #555; font-size: 0.8rem; text-align: center;">Загрузка...</p>
+            </div>
+
+            <div style="border-top: 1px solid #333; padding-top: 20px;">
+                <h3 style="font-size: 0.8rem; color: #888; margin-bottom: 16px;">Добавить новость</h3>
+
+                <div style="margin-bottom: 12px;">
+                    <label style="display: block; font-size: 0.7rem; color: #666; margin-bottom: 4px;">Дата</label>
+                    <input type="text" id="newsDate" placeholder="05.09.26" style="width: 100%; padding: 10px; background: #0a0a08; border: 1px solid #333; color: #e5e5e5; border-radius: 4px; font-family: inherit; font-size: 0.85rem;">
+                </div>
+
+                <div style="margin-bottom: 12px;">
+                    <label style="display: block; font-size: 0.7rem; color: #666; margin-bottom: 4px;">Тег</label>
+                    <input type="text" id="newsTag" placeholder="обновление" style="width: 100%; padding: 10px; background: #0a0a08; border: 1px solid #333; color: #e5e5e5; border-radius: 4px; font-family: inherit; font-size: 0.85rem;">
+                </div>
+
+                <div style="margin-bottom: 12px;">
+                    <label style="display: block; font-size: 0.7rem; color: #666; margin-bottom: 4px;">Заголовок</label>
+                    <input type="text" id="newsTitle" placeholder="Новый патч" style="width: 100%; padding: 10px; background: #0a0a08; border: 1px solid #333; color: #e5e5e5; border-radius: 4px; font-family: inherit; font-size: 0.85rem;">
+                </div>
+
+                <div style="margin-bottom: 16px;">
+                    <label style="display: block; font-size: 0.7rem; color: #666; margin-bottom: 4px;">Текст</label>
+                    <textarea id="newsText" placeholder="Описание новости..." rows="3" style="width: 100%; padding: 10px; background: #0a0a08; border: 1px solid #333; color: #e5e5e5; border-radius: 4px; font-family: inherit; font-size: 0.85rem; resize: vertical;"></textarea>
+                </div>
+
+                <button id="addNewsBtn" style="width: 100%; padding: 12px; background: var(--blue); color: white; border: none; border-radius: 4px; font-family: inherit; font-size: 0.85rem; cursor: pointer; font-weight: 700; margin-bottom: 8px;">+ ДОБАВИТЬ</button>
+                <button id="downloadBtn" style="width: 100%; padding: 12px; background: #22c55e; color: white; border: none; border-radius: 4px; font-family: inherit; font-size: 0.85rem; cursor: pointer; font-weight: 700;">⬇ СКАЧАТЬ news.json</button>
+                <p style="font-size: 0.65rem; color: #555; margin-top: 8px; text-align: center;">Замени news.json в папке и обнови главную</p>
+            </div>
+        </div>
+
+        <div class="radio-box" style="margin-top: 16px;">
+            <h2 style="font-family: 'Press Start 2P', monospace; font-size: 0.9rem; margin-bottom: 24px; color: var(--red);">ТАЙМЕР</h2>
+
+            <div id="timerPreview" style="margin-bottom: 20px; text-align: center; padding: 16px; background: #0a0a08; border: 1px solid #333; border-radius: 6px;">
+                <p style="color: #555; font-size: 0.8rem;">Таймер не настроен</p>
+            </div>
+
+            <div style="border-top: 1px solid #333; padding-top: 16px;">
+                <div style="margin-bottom: 12px;">
+                    <label style="display: block; font-size: 0.7rem; color: #666; margin-bottom: 4px;">Название</label>
+                    <input type="text" id="timerTitle" placeholder="Трейлер" style="width: 100%; padding: 10px; background: #0a0a08; border: 1px solid #333; color: #e5e5e5; border-radius: 4px; font-family: inherit; font-size: 0.85rem;">
+                </div>
+
+                <div style="margin-bottom: 12px;">
+                    <label style="display: block; font-size: 0.7rem; color: #666; margin-bottom: 4px;">Дата и время</label>
+                    <input type="datetime-local" id="timerDate" style="width: 100%; padding: 10px; background: #0a0a08; border: 1px solid #333; color: #e5e5e5; border-radius: 4px; font-family: inherit; font-size: 0.85rem;">
+                </div>
+
+                <div style="margin-bottom: 16px;">
+                    <label style="display: block; font-size: 0.7rem; color: #666; margin-bottom: 4px;">Описание (необязательно)</label>
+                    <input type="text" id="timerDesc" placeholder="Скоро откроем..." style="width: 100%; padding: 10px; background: #0a0a08; border: 1px solid #333; color: #e5e5e5; border-radius: 4px; font-family: inherit; font-size: 0.85rem;">
+                </div>
+
+                <button id="saveTimerBtn" style="width: 100%; padding: 12px; background: var(--red); color: white; border: none; border-radius: 4px; font-family: inherit; font-size: 0.85rem; cursor: pointer; font-weight: 700; margin-bottom: 8px;">СОХРАНИТЬ ТАЙМЕР</button>
+                <button id="clearTimerBtn" style="width: 100%; padding: 10px; background: none; border: 1px solid #444; color: #888; border-radius: 4px; font-family: inherit; font-size: 0.8rem; cursor: pointer;">УБРАТЬ ТАЙМЕР</button>
+
+                <label style="display: flex; align-items: center; gap: 10px; margin-top: 16px; padding: 12px; background: #0a0a08; border: 1px solid #333; border-radius: 4px; cursor: pointer;">
+                    <input type="checkbox" id="countdownOnly" style="width: 18px; height: 18px; accent-color: var(--red);">
+                    <div>
+                        <div style="font-size: 0.8rem; color: #e5e5e5;">Только таймер</div>
+                        <div style="font-size: 0.65rem; color: #666;">Скрыть всё кроме таймера и кубиков</div>
+                    </div>
+                </label>
+
+                <label style="display: flex; align-items: center; gap: 10px; margin-top: 8px; padding: 12px; background: #0a0a08; border: 1px solid #333; border-radius: 4px; cursor: pointer;">
+                    <input type="checkbox" id="hideDownload" style="width: 18px; height: 18px; accent-color: var(--red);">
+                    <div>
+                        <div style="font-size: 0.8rem; color: #e5e5e5;">Скрыть скачивание</div>
+                        <div style="font-size: 0.65rem; color: #666;">Кнопка скачивания появится после таймера</div>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <div class="radio-box" style="margin-top: 16px;">
+            <h2 style="font-family: 'Press Start 2P', monospace; font-size: 0.9rem; margin-bottom: 24px; color: var(--red);">НАСТРОЙКИ САЙТА</h2>
+
+            <label style="display: flex; align-items: center; gap: 10px; padding: 12px; background: #0a0a08; border: 1px solid #333; border-radius: 4px; cursor: pointer;">
+                <input type="checkbox" id="siteDown" style="width: 18px; height: 18px; accent-color: var(--red);">
+                <div>
+                    <div style="font-size: 0.8rem; color: #e5e5e5;">Сайт не готов</div>
+                    <div style="font-size: 0.65rem; color: #666;">Показать заглушку вместо сайта</div>
+                </div>
+            </label>
+
+            <label style="display: flex; align-items: center; gap: 10px; margin-top: 8px; padding: 12px; background: #0a0a08; border: 1px solid #333; border-radius: 4px; cursor: pointer;">
+                <input type="checkbox" id="gameNotReleased" style="width: 18px; height: 18px; accent-color: var(--red);">
+                <div>
+                    <div style="font-size: 0.8rem; color: #e5e5e5;">Игра не в релизе</div>
+                    <div style="font-size: 0.65rem; color: #666;">Кнопка скачивания заменяется на «игра ещё не вышла»</div>
+                </div>
+            </label>
+
+            <button id="saveSiteBtn" style="width: 100%; padding: 12px; background: var(--red); color: white; border: none; border-radius: 4px; font-family: inherit; font-size: 0.85rem; cursor: pointer; font-weight: 700; margin-top: 12px;">СОХРАНИТЬ</button>
+        </div>
+    </div>
+
+    <script>
+        let localNews = JSON.parse(localStorage.getItem('blumNews') || '[]');
+        let timerData = JSON.parse(localStorage.getItem('blumTimer') || 'null');
+
+        function renderNews(newsArray) {
+            const list = document.getElementById('newsList');
+
+            if (!newsArray || newsArray.length === 0) {
+                list.innerHTML = `
+                    <div style="text-align: center; padding: 30px 20px;">
+                        <div style="font-size: 1.5rem; margin-bottom: 8px; opacity: 0.3;">∅</div>
+                        <p style="color: #555; font-size: 0.8rem;">Тут пока пусто</p>
+                    </div>
+                `;
+                return;
+            }
+
+            list.innerHTML = newsArray.map((item, i) => `
+                <div style="padding: 12px; background: #1a1816; border: 1px solid #333; border-radius: 4px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: start; gap: 12px;">
+                    <div style="flex: 1; min-width: 0;">
+                        <div style="display: flex; gap: 8px; margin-bottom: 4px; align-items: center;">
+                            <span style="font-size: 0.65rem; color: #555;">${item.date}</span>
+                            <span style="font-size: 0.55rem; color: var(--blue); border: 1px solid var(--blue); padding: 1px 6px; border-radius: 3px;">${item.tag}</span>
+                        </div>
+                        <div style="font-size: 0.85rem; font-weight: 700; margin-bottom: 2px;">${item.title}</div>
+                        <div style="font-size: 0.75rem; color: #777;">${item.text}</div>
+                    </div>
+                    <button onclick="deleteNews(${i})" style="background: none; border: 1px solid #555; color: #888; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; flex-shrink: 0;">✕</button>
+                </div>
+            `).reverse().join('');
+        }
+
+        function deleteNews(index) {
+            if (!confirm('Удалить новость?')) return;
+            localNews.splice(index, 1);
+            localStorage.setItem('blumNews', JSON.stringify(localNews));
+            renderNews(localNews);
+        }
+
+        document.getElementById('addNewsBtn').addEventListener('click', () => {
+            const date = document.getElementById('newsDate').value.trim();
+            const tag = document.getElementById('newsTag').value.trim();
+            const title = document.getElementById('newsTitle').value.trim();
+            const text = document.getElementById('newsText').value.trim();
+
+            if (!date || !tag || !title || !text) {
+                alert('Заполни все поля');
+                return;
+            }
+
+            const item = { date, tag, title, text };
+            localNews.push(item);
+            localStorage.setItem('blumNews', JSON.stringify(localNews));
+
+            document.getElementById('newsDate').value = '';
+            document.getElementById('newsTag').value = '';
+            document.getElementById('newsTitle').value = '';
+            document.getElementById('newsText').value = '';
+
+            renderNews(localNews);
+        });
+
+        document.getElementById('downloadBtn').addEventListener('click', () => {
+            const json = JSON.stringify(localNews, null, 4);
+            const blob = new Blob([json], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'news.json';
+            a.click();
+            URL.revokeObjectURL(url);
+            alert('Файл скачан! Замени news.json в папке game-site.');
+        });
+
+        renderNews(localNews);
+
+        // Timer
+        function renderTimerPreview() {
+            const preview = document.getElementById('timerPreview');
+            if (!timerData) {
+                preview.innerHTML = '<p style="color: #555; font-size: 0.8rem;">Таймер не настроен</p>';
+                return;
+            }
+            preview.innerHTML = `
+                <div style="color: var(--red); font-family: 'Press Start 2P', monospace; font-size: 0.7rem; margin-bottom: 6px;">${timerData.title}</div>
+                <div style="color: #e5e5e5; font-size: 0.85rem;">${timerData.date.replace('T', ' ')}</div>
+                ${timerData.desc ? `<div style="color: #666; font-size: 0.75rem; margin-top: 4px;">${timerData.desc}</div>` : ''}
+            `;
+        }
+
+        renderTimerPreview();
+
+        function downloadTimer() {
+            const data = timerData ? JSON.stringify(timerData, null, 4) : 'null';
+            const blob = new Blob([data], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'timer.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        document.getElementById('saveTimerBtn').addEventListener('click', () => {
+            const title = document.getElementById('timerTitle').value.trim();
+            const date = document.getElementById('timerDate').value;
+            const desc = document.getElementById('timerDesc').value.trim();
+            const countdownOnly = document.getElementById('countdownOnly').checked;
+            const hideDownload = document.getElementById('hideDownload').checked;
+
+            if (!title || !date) {
+                alert('Заполни название и дату');
+                return;
+            }
+
+            timerData = { title, date, desc, countdownOnly, hideDownload };
+            localStorage.setItem('blumTimer', JSON.stringify(timerData));
+            renderTimerPreview();
+            downloadTimer();
+            alert('Таймер сохранён и файл скачан! Замени timer.json в папке.');
+        });
+
+        document.getElementById('clearTimerBtn').addEventListener('click', () => {
+            timerData = null;
+            localStorage.removeItem('blumTimer');
+            document.getElementById('countdownOnly').checked = false;
+            document.getElementById('hideDownload').checked = false;
+            renderTimerPreview();
+            downloadTimer();
+            alert('Таймер убран и файл скачан! Замени timer.json в папке.');
+        });
+
+        // Site settings
+        const savedSiteSettings = JSON.parse(localStorage.getItem('blumSiteSettings') || '{}');
+        if (savedSiteSettings.siteDown) {
+            document.getElementById('siteDown').checked = true;
+        }
+        if (savedSiteSettings.gameNotReleased) {
+            document.getElementById('gameNotReleased').checked = true;
+        }
+
+        document.getElementById('saveSiteBtn').addEventListener('click', () => {
+            const siteDown = document.getElementById('siteDown').checked;
+            const gameNotReleased = document.getElementById('gameNotReleased').checked;
+            localStorage.setItem('blumSiteSettings', JSON.stringify({ siteDown, gameNotReleased }));
+
+            // Download siteSettings.json
+            const json = JSON.stringify({ siteDown, gameNotReleased }, null, 4);
+            const blob = new Blob([json], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'siteSettings.json';
+            a.click();
+            URL.revokeObjectURL(url);
+
+            alert('Настройки сохранены! Замени siteSettings.json в папке.');
+        });
+
+        // Set checkboxes from saved data
+        if (timerData && timerData.countdownOnly) {
+            document.getElementById('countdownOnly').checked = true;
+        }
+        if (timerData && timerData.hideDownload) {
+            document.getElementById('hideDownload').checked = true;
+        }
+    </script>
+</body>
+</html>

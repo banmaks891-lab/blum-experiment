@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blum Experiment</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="scanlines"></div>
+
+    <header class="header">
+        <div class="header-inner">
+            <a href="#" class="logo">
+                <span class="logo-b">B</span>LUM
+            </a>
+            <nav class="nav" id="nav">
+                <a href="#home" class="nav-link active">Главная</a>
+                <a href="#about" class="nav-link">Об игре</a>
+                <a href="#download" class="nav-link">Скачать</a>
+                <a href="#news" class="nav-link">Новости</a>
+                <a href="#contact" class="nav-link">Контакты</a>
+            </nav>
+            <button class="lang-btn" id="langBtn">EN</button>
+            <button class="burger" id="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <canvas class="hero-cubes" id="heroCubes"></canvas>
+            <div class="hero-content">
+                <div class="hero-label" data-hero>HORROR VR</div>
+                <h1 class="hero-title">
+                    <span class="line1" data-hero data-scramble>BLUM</span>
+                    <span class="line2" data-hero data-type>EXPERIMENT</span>
+                </h1>
+                <p class="hero-desc" data-hero>Беги. Дыши тише. Оно слышит.</p>
+                <div class="hero-buttons" data-hero>
+                    <a href="#download" class="btn-main">скачать APK ↓</a>
+                    <a href="#about" class="btn-ghost">узнать больше</a>
+                </div>
+                <div class="hero-stats" data-hero>
+                    <div class="stat">
+                        <span class="stat-num">v1.0.5</span>
+                        <span class="stat-label">версия</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-num">Beta</span>
+                        <span class="stat-label">стадия</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-num">VR</span>
+                        <span class="stat-label">формат</span>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-hint">↓</div>
+            <button class="secret-btn" data-secret="0"></button>
+        </section>
+
+        <div id="timerBanner" class="timer-banner" style="display: none;">
+            <div class="container">
+                <div class="timer-content">
+                    <div class="timer-label" id="timerLabel"></div>
+                    <div class="timer-countdown" id="timerCountdown"></div>
+                    <div class="timer-desc" id="timerDescText"></div>
+                </div>
+            </div>
+        </div>
+
+        <section class="about" id="about">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-num">01</span>
+                    <h2>об игре</h2>
+                </div>
+                <div class="about-grid">
+                    <div class="about-item">
+                        <div class="about-icon">🦍</div>
+                        <h3>Gorilla Locomotion</h3>
+                        <p>Двигайся руками. Хватайся, отталкивайся, беги. Ноги не нужны.</p>
+                    </div>
+                    <div class="about-item">
+                        <div class="about-icon">👁</div>
+                        <h3>Хоррор</h3>
+                        <p>Оно за тобой. Не оглядывайся. Не дыши громко.</p>
+                    </div>
+                    <div class="about-item">
+                        <div class="about-icon">🏃</div>
+                        <h3>Побег</h3>
+                        <p>Беги через коридоры. Запрыгивай на стены. Выживай любой ценой.</p>
+                    </div>
+                    <div class="about-item">
+                        <div class="about-icon">🌑</div>
+                        <h3>Атмосфера</h3>
+                        <p>Темнота. Тишина. И что-то не то в глубине.</p>
+                    </div>
+                </div>
+                <button class="secret-btn" data-secret="1"></button>
+            </div>
+        </section>
+
+        <section class="screenshots-section" id="screenshots">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-num">01.5</span>
+                    <h2>скриншоты</h2>
+                </div>
+                <div class="screenshots-grid">
+                    <div class="screenshot-item">
+                        <img src="images/11111.jpg" alt="Скриншот 1" loading="lazy">
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="images/22222222.jpg" alt="Скриншот 2" loading="lazy">
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="images/33333333.jpg" alt="Скриншот 3" loading="lazy">
+                    </div>
+                </div>
+                <button class="secret-btn" data-secret="2"></button>
+            </div>
+        </section>
+
+        <section class="download-section" id="download">
+            <div class="container">
+                <div class="download-box">
+                    <div class="download-glitch"></div>
+                    <div class="download-content">
+                        <div class="beta-tag">OPEN BETA</div>
+                        <h2>Скачай бету</h2>
+                        <p class="download-sub">Blum Experiment — Early Access</p>
+                        
+                        <div class="version-info">
+                            <div class="ver-item">
+                                <span>версия</span>
+                                <strong>1.0.5.9</strong>
+                            </div>
+                            <div class="ver-item">
+                                <span>платформа</span>
+                                <strong>Meta Quest</strong>
+                            </div>
+                            <div class="ver-item">
+                                <span>размер</span>
+                                <strong>~150 МБ</strong>
+                            </div>
+                        </div>
+
+                        <a href="1.0.5.9 (Early Acess).apk" class="download-btn" download>
+                            <span class="dl-icon">⬇</span>
+                            <span class="dl-text">
+                                <span class="dl-main">СКАЧАТЬ APK</span>
+                                <span class="dl-sub">1.0.5.9 Early Access</span>
+                            </span>
+                        </a>
+
+                        <div class="download-warn">
+                            ⚠ Наушники обязательны. Не играй в темноте. Серьёзно.
+                        </div>
+                    </div>
+                    <button class="secret-btn" data-secret="3"></button>
+                </div>
+            </div>
+        </section>
+
+        <section class="news-section" id="news">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-num">02</span>
+                    <h2>новости</h2>
+                </div>
+                <div class="news-list" id="newsList"></div>
+                <button class="secret-btn" data-secret="4"></button>
+            </div>
+        </section>
+
+        <section class="contact-section" id="contact">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-num">03</span>
+                    <h2>связь</h2>
+                </div>
+                <div class="contact-grid">
+                    <a href="https://t.me/mnudbsptaggers" class="contact-card" target="_blank">
+                        <span class="contact-icon">✈</span>
+                        <span class="contact-name">Telegram</span>
+                        <span class="contact-desc">Новости, анонсы</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-logo">
+                <span class="logo-b">B</span>LUM EXPERIMENT
+            </div>
+            <a href="radio.html" class="secret-link">
+                <img src="images/tretert-Photoroom.png" alt="???" class="secret-img">
+            </a>
+            <div class="footer-copy">© 2026 Blum Experiment. Все права защищены.</div>
+        </div>
+    </footer>
+
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">✕</button>
+        <img class="lightbox-img" id="lightboxImg" src="" alt="">
+        <button class="lightbox-prev" id="lightboxPrev">‹</button>
+        <button class="lightbox-next" id="lightboxNext">›</button>
+    </div>
+
+    <div class="portal-overlay" id="portalOverlay">
+        <div class="portal-content">
+            <div class="portal-ring"></div>
+            <div class="portal-ring ring2"></div>
+            <div class="portal-ring ring3"></div>
+            <div class="portal-text">ПОРТАЛ ОТКРЫТ</div>
+        </div>
+    </div>
+
+    <div class="portal-character" id="portalCharacter">
+        <img src="images/character.png" alt="???">
+        <div class="speech-bubble" id="speechBubble1">
+            Оу, извини что все исчезло, я просто старался найти что-то новое для игры
+        </div>
+        <div class="speech-bubble" id="speechBubble2" style="display: none;">
+            Ну да ладно, этот процесс не быстрый. Чем ты тут занимаешься?
+        </div>
+        <div class="speech-bubble" id="speechBubble3" style="display: none;">
+            А? Что есть сайт по моей игре? Как круто!
+        </div>
+        <div class="speech-bubble" id="speechBubble4" style="display: none;">
+            Чем-нибудь займемся пока ждем?
+        </div>
+        <div class="speech-bubble" id="speechBubble5" style="display: none;">
+            Давай сыграем в крестики-нолики что ли!
+        </div>
+        <div class="speech-bubble" id="speechBubble6" style="display: none;">
+            Ох, блин, это было непросто, что-то долговато...
+        </div>
+    </div>
+
+    <div class="tic-tac-toe" id="ticTacToe">
+        <div class="ttt-header">
+            <div class="ttt-title">Крестики-Нолики</div>
+            <div class="ttt-score">Раунд: <span id="tttRound">1</span>/5 | Победы: <span id="tttWins">0</span></div>
+        </div>
+        <div class="ttt-board" id="tttBoard">
+            <div class="ttt-cell" data-index="0"></div>
+            <div class="ttt-cell" data-index="1"></div>
+            <div class="ttt-cell" data-index="2"></div>
+            <div class="ttt-cell" data-index="3"></div>
+            <div class="ttt-cell" data-index="4"></div>
+            <div class="ttt-cell" data-index="5"></div>
+            <div class="ttt-cell" data-index="6"></div>
+            <div class="ttt-cell" data-index="7"></div>
+            <div class="ttt-cell" data-index="8"></div>
+        </div>
+        <div class="ttt-status" id="tttStatus">Твой ход!</div>
+        <button class="ttt-restart" id="tttRestart" style="display: none;">Следующий раунд</button>
+        <button class="ttt-close" id="tttClose">Закрыть</button>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Secret portal
+        const secretBtns = document.querySelectorAll('.secret-btn');
+        const portalOverlay = document.getElementById('portalOverlay');
+        const clicked = new Set();
+
+        secretBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const id = btn.dataset.secret;
+                if (clicked.has(id)) return;
+                clicked.add(id);
+                btn.classList.add('active');
+
+                if (clicked.size === 5) {
+                    portalOverlay.classList.add('active');
+                    const portalCharacter = document.getElementById('portalCharacter');
+
+                    // Suck entire site into portal
+                    document.querySelector('.header').classList.add('suck-in');
+                    document.querySelector('.hero').classList.add('suck-in');
+                    document.querySelector('.about').classList.add('suck-in');
+                    document.querySelector('.screenshots-section').classList.add('suck-in');
+                    document.querySelector('.download-section').classList.add('suck-in');
+                    document.querySelector('.news-section').classList.add('suck-in');
+                    document.querySelector('.contact-section').classList.add('suck-in');
+                    document.querySelector('.footer').classList.add('suck-in');
+
+                    secretBtns.forEach(b => b.classList.add('suck-in'));
+
+                    // Character comes out after sucking
+                    setTimeout(() => {
+                        portalOverlay.classList.remove('active');
+                        portalCharacter.classList.add('show');
+                        typeWriter(document.getElementById('speechBubble1'));
+                    }, 25000);
+
+                    // Second message
+                    setTimeout(() => {
+                        document.getElementById('speechBubble1').style.display = 'none';
+                        typeWriter(document.getElementById('speechBubble2'));
+                    }, 30000);
+
+                    // Third message
+                    setTimeout(() => {
+                        document.getElementById('speechBubble2').style.display = 'none';
+                        typeWriter(document.getElementById('speechBubble3'));
+                    }, 35000);
+
+                    // Fourth message
+                    setTimeout(() => {
+                        document.getElementById('speechBubble3').style.display = 'none';
+                        typeWriter(document.getElementById('speechBubble4'));
+                    }, 40000);
+
+                    // Fifth message
+                    setTimeout(() => {
+                        document.getElementById('speechBubble4').style.display = 'none';
+                        typeWriter(document.getElementById('speechBubble5'));
+                    }, 45000);
+
+                    // Launch tic tac toe
+                    setTimeout(() => {
+                        document.getElementById('portalCharacter').classList.remove('show');
+                        document.getElementById('speechBubble5').style.display = 'none';
+                        document.getElementById('ticTacToe').classList.add('active');
+                        secretBtns.forEach(b => b.classList.remove('active'));
+                    }, 50000);
+                }
+            });
+        });
+    </script>
+    <script>
+        fetch('news.json')
+            .then(r => r.json())
+            .then(news => {
+                const newsList = document.getElementById('newsList');
+                if (!newsList) return;
+
+                if (!news || news.length === 0) {
+                    newsList.innerHTML = `
+                        <div style="text-align: center; padding: 40px 20px;">
+                            <div style="font-size: 2rem; margin-bottom: 12px; opacity: 0.3;">∅</div>
+                            <p style="color: #555; font-size: 0.85rem;">Тут пока пусто</p>
+                            <p style="color: #444; font-size: 0.7rem; margin-top: 4px;">Скоро здесь появятся новости</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                newsList.innerHTML = news.map(item => `
+                    <article class="news-item">
+                        <div class="news-meta">
+                            <span class="news-date">${item.date}</span>
+                            <span class="news-tag">${item.tag}</span>
+                        </div>
+                        <h3>${item.title}</h3>
+                        <p>${item.text}</p>
+                    </article>
+                `).join('');
+            })
+            .catch(() => {
+                const newsList = document.getElementById('newsList');
+                if (newsList) {
+                    newsList.innerHTML = `
+                        <div style="text-align: center; padding: 40px 20px;">
+                            <div style="font-size: 2rem; margin-bottom: 12px; opacity: 0.3;">∅</div>
+                            <p style="color: #555; font-size: 0.85rem;">Тут пока пусто</p>
+                            <p style="color: #444; font-size: 0.7rem; margin-top: 4px;">Скоро здесь появятся новости</p>
+                        </div>
+                    `;
+                }
+            });
+    </script>
+    <script>
+        // Timer
+        fetch('timer.json')
+            .then(r => r.json())
+            .then(timerData => {
+                const timerBanner = document.getElementById('timerBanner');
+
+                if (timerData && timerData.date) {
+                    const targetDate = new Date(timerData.date);
+
+                    function updateTimer() {
+                        const now = new Date();
+                        const diff = targetDate - now;
+
+                        if (diff <= 0) {
+                            document.getElementById('timerCountdown').textContent = 'СЕЙЧАС';
+
+                            if (timerData.countdownOnly) {
+                                document.querySelectorAll('.hero-content, .about, .screenshots-section, .download-section, .news-section, .contact-section, .secret-link').forEach(el => {
+                                    el.style.display = '';
+                                });
+                                document.querySelector('.header').style.display = '';
+                                document.querySelector('.footer').style.display = '';
+                            }
+
+                            // Hide timer banner when timer ends
+                            timerBanner.style.display = 'none';
+
+                            // Show download button when timer ends
+                            if (timerData.hideDownload) {
+                                document.querySelector('.download-section').style.display = '';
+                                document.querySelector('.btn-main').textContent = currentLang === 'ru' ? 'скачать APK ↓' : 'download APK ↓';
+                                document.querySelector('.btn-main').href = '#download';
+                                document.querySelector('.btn-main').style.pointerEvents = '';
+                                document.querySelector('.btn-main').style.opacity = '';
+                            }
+                            return;
+                        }
+
+                        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                        const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+                        let display = '';
+                        if (days > 0) display += days + 'д ';
+                        display += String(hours).padStart(2, '0') + ':';
+                        display += String(mins).padStart(2, '0') + ':';
+                        display += String(secs).padStart(2, '0');
+
+                        document.getElementById('timerCountdown').textContent = display;
+                    }
+
+                    document.getElementById('timerLabel').textContent = timerData.title;
+                    document.getElementById('timerDescText').textContent = timerData.desc || '';
+                    timerBanner.style.display = 'block';
+
+                    updateTimer();
+                    setInterval(updateTimer, 1000);
+
+                    // Countdown only mode
+                    if (timerData.countdownOnly) {
+                        document.querySelectorAll('.hero-content, .about, .screenshots-section, .download-section, .news-section, .contact-section, .secret-link').forEach(el => {
+                            el.style.display = 'none';
+                        });
+                        document.querySelector('.header').style.display = 'none';
+                        document.querySelector('.footer').style.display = 'none';
+                        timerBanner.style.borderTop = 'none';
+                        timerBanner.style.minHeight = '100vh';
+                        timerBanner.style.display = 'flex';
+                        timerBanner.style.alignItems = 'center';
+                        timerBanner.style.justifyContent = 'center';
+                        document.getElementById('timerCountdown').style.fontSize = '3rem';
+                        document.querySelector('.hero').style.minHeight = '100vh';
+                    }
+
+                    // Hide download button when timer active
+                    if (timerData.hideDownload) {
+                        document.querySelector('.download-section').style.display = 'none';
+                        document.querySelector('.btn-main').textContent = currentLang === 'ru' ? 'игра ещё не вышла' : 'game not released yet';
+                        document.querySelector('.btn-main').href = '#';
+                        document.querySelector('.btn-main').style.pointerEvents = 'none';
+                        document.querySelector('.btn-main').style.opacity = '0.5';
+                    }
+                }
+            })
+            .catch(() => {});
+
+        // Site settings
+        fetch('siteSettings.json')
+            .then(r => r.json())
+            .then(data => {
+                if (data && data.siteDown) {
+                    document.body.innerHTML = `
+                        <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #0c0c0c; font-family: 'Rubik', sans-serif;">
+                            <div style="text-align: center; padding: 40px;">
+                                <div style="font-family: 'Press Start 2P', monospace; font-size: 2rem; margin-bottom: 20px;">
+                                    <span style="color: #2563eb;">B</span>LUM
+                                </div>
+                                <div style="font-size: 1.2rem; color: #666; margin-bottom: 12px;">Сейчас ничего не готово</div>
+                                <div style="font-size: 0.9rem; color: #444;">Не заходите сюда!</div>
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                if (data && data.gameNotReleased) {
+                    document.querySelector('.download-section').style.display = 'none';
+                    const btnMain = document.querySelector('.btn-main');
+                    btnMain.textContent = currentLang === 'ru' ? 'игра ещё не вышла' : 'game not released yet';
+                    btnMain.href = '#';
+                    btnMain.style.pointerEvents = 'none';
+                    btnMain.style.opacity = '0.5';
+                }
+            })
+            .catch(() => {});
+    </script>
+    <script>
+        // Tic Tac Toe
+        const tttBoard = document.getElementById('tttBoard');
+        const tttStatus = document.getElementById('tttStatus');
+        const tttRestart = document.getElementById('tttRestart');
+        const tttClose = document.getElementById('tttClose');
+        const tttRoundEl = document.getElementById('tttRound');
+        const tttWinsEl = document.getElementById('tttWins');
+        let board = Array(9).fill('');
+        let currentPlayer = 'X';
+        let gameActive = true;
+        let round = 1;
+        let wins = 0;
+        const maxRounds = 5;
+
+        const winCombos = [
+            [0,1,2],[3,4,5],[6,7,8],
+            [0,3,6],[1,4,7],[2,5,8],
+            [0,4,8],[2,4,6]
+        ];
+
+        function updateScore() {
+            tttRoundEl.textContent = round;
+            tttWinsEl.textContent = wins;
+        }
+
+        function checkWin(player) {
+            return winCombos.some(combo => combo.every(i => board[i] === player));
+        }
+
+        function checkDraw() {
+            return board.every(cell => cell !== '');
+        }
+
+        function aiMove() {
+            const empty = board.map((v, i) => v === '' ? i : -1).filter(i => i !== -1);
+            if (empty.length === 0) return;
+
+            // Try to win
+            for (const combo of winCombos) {
+                const vals = combo.map(i => board[i]);
+                if (vals.filter(v => v === 'O').length === 2 && vals.includes('')) {
+                    board[combo[vals.indexOf('')]] = 'O';
+                    render();
+                    if (checkWin('O')) endRound('O');
+                    return;
+                }
+            }
+
+            // Block player
+            for (const combo of winCombos) {
+                const vals = combo.map(i => board[i]);
+                if (vals.filter(v => v === 'X').length === 2 && vals.includes('')) {
+                    board[combo[vals.indexOf('')]] = 'O';
+                    render();
+                    return;
+                }
+            }
+
+            // Center
+            if (board[4] === '') {
+                board[4] = 'O';
+                render();
+                return;
+            }
+
+            // Random
+            const r = empty[Math.floor(Math.random() * empty.length)];
+            board[r] = 'O';
+            render();
+        }
+
+        function endRound(winner) {
+            gameActive = false;
+            const t = translations[currentLang];
+            if (winner === 'X') {
+                wins++;
+                tttStatus.textContent = t.tttWin;
+            } else if (winner === 'O') {
+                tttStatus.textContent = t.tttLose;
+            } else {
+                tttStatus.textContent = t.tttDraw;
+            }
+            updateScore();
+
+            if (round < maxRounds) {
+                tttRestart.style.display = 'block';
+            } else {
+                tttStatus.textContent += t.tttEnd + wins + t.tttAi + (maxRounds - wins);
+                setTimeout(show6thMessage, 2000);
+            }
+        }
+
+        function render() {
+            board.forEach((val, i) => {
+                tttBoard.children[i].textContent = val;
+                tttBoard.children[i].className = 'ttt-cell' + (val ? ' filled' : '');
+            });
+        }
+
+        function resetBoard() {
+            board = Array(9).fill('');
+            currentPlayer = 'X';
+            gameActive = true;
+            tttStatus.textContent = 'Твой ход!';
+            tttRestart.style.display = 'none';
+            render();
+        }
+
+        tttBoard.addEventListener('click', (e) => {
+            const cell = e.target;
+            const i = parseInt(cell.dataset.index);
+            if (!gameActive || board[i] !== '' || currentPlayer !== 'X') return;
+
+            board[i] = 'X';
+            render();
+
+            if (checkWin('X')) {
+                endRound('X');
+                return;
+            }
+            if (checkDraw()) {
+                endRound(null);
+                return;
+            }
+
+            currentPlayer = 'O';
+            tttStatus.textContent = currentLang === 'ru' ? 'Я думаю...' : 'Thinking...';
+            setTimeout(() => {
+                aiMove();
+                if (checkWin('O')) {
+                    endRound('O');
+                    return;
+                }
+                if (checkDraw()) {
+                    endRound(null);
+                    return;
+                }
+                currentPlayer = 'X';
+                tttStatus.textContent = 'Твой ход!';
+            }, 500);
+        });
+
+        tttRestart.addEventListener('click', () => {
+            if (round < maxRounds) {
+                round++;
+            } else {
+                round = 1;
+                wins = 0;
+            }
+            updateScore();
+            resetBoard();
+        });
+
+        tttClose.addEventListener('click', () => {
+            document.getElementById('ticTacToe').classList.remove('active');
+            round = 1;
+            wins = 0;
+            updateScore();
+            resetBoard();
+        });
+
+        function show6thMessage() {
+            document.getElementById('ticTacToe').classList.remove('active');
+            const portalCharacter = document.getElementById('portalCharacter');
+            portalCharacter.classList.add('show');
+            typeWriter(document.getElementById('speechBubble6'));
+
+            setTimeout(() => {
+                portalCharacter.classList.remove('show');
+                document.getElementById('speechBubble6').style.display = 'none';
+                // White flash + sound
+                const flash = document.createElement('div');
+                flash.className = 'white-flash';
+                document.body.appendChild(flash);
+                const boom = new Audio('explosion.mp3');
+                boom.play();
+                setTimeout(() => {
+                    flash.remove();
+                    document.querySelectorAll('.suck-in').forEach(el => el.classList.remove('suck-in'));
+                    clicked.clear();
+                }, 1000);
+
+                round = 1;
+                wins = 0;
+                updateScore();
+                resetBoard();
+            }, 5000);
+        }
+
+        function typeWriter(bubble) {
+            const text = bubble.textContent;
+            bubble.textContent = '';
+            bubble.style.display = 'block';
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    bubble.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, 30);
+                }
+            }
+            type();
+        }
+
+        // Language switcher
+        const translations = {
+            ru: {
+                nav: ['Главная', 'Об игре', 'Скачать', 'Новости', 'Контакты'],
+                heroLabel: 'HORROR VR',
+                heroDesc: 'Беги. Дыши тише. Оно слышит.',
+                downloadBtn: 'скачать APK ↓',
+                gameNotReleased: 'игра ещё не вышла',
+                learnMore: 'узнать больше',
+                aboutTitle: 'об игре',
+                aboutItems: [
+                    { title: 'Gorilla Locomotion', desc: 'Двигайся руками. Хватайся, отталкивайся, беги. Ноги не нужны.' },
+                    { title: 'Хоррор', desc: 'Оно за тобой. Не оглядывайся. Не дыши громко.' },
+                    { title: 'Побег', desc: 'Беги через коридоры. Запрыгивай на стены. Выживай любой ценой.' },
+                    { title: 'Атмосфера', desc: 'Темнота. Тишина. И что-то не то в глубине.' }
+                ],
+                screenshotsTitle: 'скриншоты',
+                downloadTitle: 'Скачай бету',
+                downloadSub: 'Blum Experiment — Early Access',
+                downloadWarn: '⚠ Наушники обязательны. Не играй в темноте. Серьёзно.',
+                newsTitle: 'новости',
+                contactTitle: 'связь',
+                contactDesc: 'Новости, анонсы',
+                footerCopy: '© 2026 Blum Experiment. Все права защищены.',
+                tttTitle: 'Крестики-Нолики',
+                tttStatus: 'Твой ход!',
+                tttNext: 'Следующий раунд',
+                tttClose: 'Закрыть',
+                portalText: 'ПОРТАЛ ОТКРЫТ',
+                bubbles: [
+                    'Оу, извини что все исчезло, я просто старался найти что-то новое для игры',
+                    'Ну да ладно, этот процесс не быстрый. Чем ты тут занимаешься?',
+                    'А? Что есть сайт по моей игре? Как круто!',
+                    'Чем-нибудь займемся пока ждем?',
+                    'Давай сыграем в крестики-нолики что ли!',
+                    'Ох, блин, это было непросто, что-то долговато...'
+                ],
+                tttWin: 'Ты победил!',
+                tttLose: 'Я победил!',
+                tttDraw: 'Ничья!',
+                tttEnd: 'Игра окончена! Ты: ',
+                tttAi: ' | Я: '
+            },
+            en: {
+                nav: ['Home', 'About', 'Download', 'News', 'Contact'],
+                heroLabel: 'HORROR VR',
+                heroDesc: 'Run. Breathe quieter. It hears.',
+                downloadBtn: 'download APK ↓',
+                gameNotReleased: 'game not released yet',
+                learnMore: 'learn more',
+                aboutTitle: 'about the game',
+                aboutItems: [
+                    { title: 'Gorilla Locomotion', desc: 'Move with your hands. Grab, push, run. No legs needed.' },
+                    { title: 'Horror', desc: "It's behind you. Don't look back. Don't breathe loud." },
+                    { title: 'Escape', desc: 'Run through corridors. Jump on walls. Survive at any cost.' },
+                    { title: 'Atmosphere', desc: 'Darkness. Silence. And something wrong in the depths.' }
+                ],
+                screenshotsTitle: 'screenshots',
+                downloadTitle: 'Download beta',
+                downloadSub: 'Blum Experiment — Early Access',
+                downloadWarn: '⚠ Headphones required. Don\'t play in the dark. Seriously.',
+                newsTitle: 'news',
+                contactTitle: 'contact',
+                contactDesc: 'News, announcements',
+                footerCopy: '© 2026 Blum Experiment. All rights reserved.',
+                tttTitle: 'Tic Tac Toe',
+                tttStatus: 'Your turn!',
+                tttNext: 'Next round',
+                tttClose: 'Close',
+                portalText: 'PORTAL OPENED',
+                bubbles: [
+                    'Oh, sorry everything disappeared, I was just trying to find something new for the game',
+                    'Well anyway, this process isn\'t quick. What are you doing here?',
+                    'Huh? There\'s a website for my game? That\'s so cool!',
+                    'Shall we do something while we wait?',
+                    'Let\'s play tic-tac-toe!',
+                    'Oh man, that wasn\'t easy, took a while...'
+                ],
+                tttWin: 'You won!',
+                tttLose: 'I won!',
+                tttDraw: 'Draw!',
+                tttEnd: 'Game over! You: ',
+                tttAi: ' | Me: '
+            }
+        };
+
+        let currentLang = 'ru';
+        const langBtn = document.getElementById('langBtn');
+
+        function setLang(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+
+            // Nav
+            document.querySelectorAll('.nav-link').forEach((el, i) => {
+                el.textContent = t.nav[i];
+            });
+
+            // Hero
+            document.querySelector('.hero-label').textContent = t.heroLabel;
+            document.querySelector('.hero-desc').textContent = t.heroDesc;
+
+            // Buttons
+            const btnMain = document.querySelector('.btn-main');
+            if (btnMain.style.pointerEvents === 'none') {
+                btnMain.textContent = t.gameNotReleased;
+            } else {
+                btnMain.textContent = t.downloadBtn;
+            }
+            document.querySelector('.btn-ghost').textContent = t.learnMore;
+
+            // About
+            document.querySelector('.about h2').textContent = t.aboutTitle;
+            document.querySelectorAll('.about-item').forEach((el, i) => {
+                el.querySelector('h3').textContent = t.aboutItems[i].title;
+                el.querySelector('p').textContent = t.aboutItems[i].desc;
+            });
+
+            // Screenshots
+            document.querySelector('.screenshots-section h2').textContent = t.screenshotsTitle;
+
+            // Download
+            document.querySelector('.download-content h2').textContent = t.downloadTitle;
+            document.querySelector('.download-sub').textContent = t.downloadSub;
+            document.querySelector('.download-warn').textContent = t.downloadWarn;
+
+            // News
+            document.querySelector('.news-section h2').textContent = t.newsTitle;
+
+            // Contact
+            document.querySelector('.contact-section h2').textContent = t.contactTitle;
+            document.querySelector('.contact-desc').textContent = t.contactDesc;
+
+            // Footer
+            document.querySelector('.footer-copy').textContent = t.footerCopy;
+
+            // Tic Tac Toe
+            document.querySelector('.ttt-title').textContent = t.tttTitle;
+            document.getElementById('tttStatus').textContent = t.tttStatus;
+            document.getElementById('tttRestart').textContent = t.tttNext;
+            document.getElementById('tttClose').textContent = t.tttClose;
+
+            // Portal
+            document.querySelector('.portal-text').textContent = t.portalText;
+
+            // Speech bubbles
+            document.getElementById('speechBubble1').textContent = t.bubbles[0];
+            document.getElementById('speechBubble2').textContent = t.bubbles[1];
+            document.getElementById('speechBubble3').textContent = t.bubbles[2];
+            document.getElementById('speechBubble4').textContent = t.bubbles[3];
+            document.getElementById('speechBubble5').textContent = t.bubbles[4];
+            document.getElementById('speechBubble6').textContent = t.bubbles[5];
+
+            langBtn.textContent = lang === 'ru' ? 'RU' : 'EN';
+        }
+
+        langBtn.addEventListener('click', () => {
+            setLang(currentLang === 'ru' ? 'en' : 'ru');
+        });
+    </script>
+</body>
+</html>

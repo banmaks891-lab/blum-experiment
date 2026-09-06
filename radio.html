@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blum FM</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="radio-page">
+    <div class="radio-container">
+        <a href="index.html" class="back-link">← назад</a>
+
+        <div class="radio-box">
+            <div class="radio-screen">
+                <div class="radio-static" id="radioStatic"></div>
+                <div class="radio-display">
+                    <div class="freq" id="freqDisplay">87.5</div>
+                    <div class="radio-label" id="radioLabel">НАСТРОЙ АНТЕННУ</div>
+                </div>
+            </div>
+
+            <div class="antenna-area">
+                <div class="antenna" id="antenna">
+                    <div class="antenna-rod" id="antennaRod"></div>
+                    <div class="antenna-base"></div>
+                    <div class="antenna-knob" id="antennaKnob"></div>
+                </div>
+                <p class="antenna-hint">Тяни за антенну или ползунок</p>
+            </div>
+
+            <div class="slider-area">
+                <input type="range" id="freqSlider" class="freq-slider" min="87.5" max="108.0" step="0.1" value="87.5">
+                <div class="slider-labels">
+                    <span>87.5</span>
+                    <span>108.0</span>
+                </div>
+            </div>
+
+            <div class="radio-controls">
+                <button class="radio-btn on" id="playBtn">▶ ВКЛ</button>
+                <div class="volume-bar">
+                    <span>ГРОМКОСТЬ</span>
+                    <input type="range" id="volumeSlider" min="0" max="100" value="70">
+                </div>
+            </div>
+        </div>
+
+        <audio id="radioAudio" src="blum FM222222.mp3" preload="auto"></audio>
+        <audio id="noiseAudio" preload="auto"></audio>
+    </div>
+
+    <script>
+        const slider = document.getElementById('freqSlider');
+        const freqDisplay = document.getElementById('freqDisplay');
+        const radioLabel = document.getElementById('radioLabel');
+        const antennaRod = document.getElementById('antennaRod');
+        const antennaKnob = document.getElementById('antennaKnob');
+        const antenna = document.getElementById('antenna');
+        const radioStatic = document.getElementById('radioStatic');
+        const playBtn = document.getElementById('playBtn');
+        const audio = document.getElementById('radioAudio');
+        const volumeSlider = document.getElementById('volumeSlider');
+
+        const targetFreq = 94.6;
+        const perfectTolerance = 0.3;
+        const nearTolerance = 2.0;
+        let isPlayingMusic = false;
+        let radioOn = true;
+        let noiseSource = null;
+
+        audio.volume = 0.7;
+
+        function createNoise(gain) {
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const bufferSize = audioCtx.sampleRate * 2;
+            const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            const data = buffer.getChannelData(0);
+
+            for (let i = 0; i < bufferSize; i++) {
+                data[i] = Math.random() * 2 - 1;
+            }
+
+            const noise = audioCtx.createBufferSource();
+            noise.buffer = buffer;
+            noise.loop = true;
+
+            const gainNode = audioCtx.createGain();
+            gainNode.gain.value = gain;
+
+            noise.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+
+            return { noise, gainNode, audioCtx };
+        }
+
+        function startNoise(gain) {
+            stopNoise();
+            noiseSource = createNoise(gain);
+            noiseSource.noise.start();
+        }
+
+        function stopNoise() {
+            if (noiseSource) {
+                noiseSource.noise.stop();
+                noiseSource.audioCtx.close();
+                noiseSource = null;
+            }
+        }
+
+        function updateAntenna(freq) {
+            const angle = ((freq - 87.5) / (108 - 87.5)) * 90 - 45;
+            antennaRod.style.transform = `rotate(${angle}deg)`;
+        }
+
+        function updateRadio() {
+            const freq = parseFloat(slider.value);
+            freqDisplay.textContent = freq.toFixed(1);
+
+            updateAntenna(freq);
+
+            const dist = Math.abs(freq - targetFreq);
+
+            if (dist < perfectTolerance) {
+                // Perfect signal
+                radioLabel.textContent = '★ BLUM FM ★';
+                radioLabel.style.color = '#22c55e';
+                radioStatic.style.opacity = '0';
+                stopNoise();
+
+                if (radioOn && !isPlayingMusic) {
+                    audio.volume = volumeSlider.value / 100;
+                    audio.play();
+                    isPlayingMusic = true;
+                    playBtn.textContent = '⏸ ВЫКЛ';
+                }
+            } else if (dist < nearTolerance) {
+                // Near - music with interference
+                radioLabel.textContent = 'ПОЙМАЛ СИГНАЛ...';
+                radioLabel.style.color = '#eab308';
+                radioStatic.style.opacity = '0';
+
+                const proximity = 1 - (dist - perfectTolerance) / (nearTolerance - perfectTolerance);
+                const interference = (1 - proximity) * 0.2;
+                startNoise(interference);
+
+                if (radioOn && isPlayingMusic) {
+                    audio.volume = (volumeSlider.value / 100) * (0.3 + proximity * 0.7);
+                }
+
+                if (radioOn && !isPlayingMusic) {
+                    audio.volume = (volumeSlider.value / 100) * 0.3;
+                    audio.play();
+                    isPlayingMusic = true;
+                    playBtn.textContent = '⏸ ВЫКЛ';
+                }
+            } else {
+                // Far - only noise
+                radioLabel.textContent = 'ПОМОХИ АНТЕННОЙ';
+                radioLabel.style.color = '#e5e5e5';
+                radioStatic.style.opacity = radioOn ? String(Math.min(1, dist / 8)) : '0';
+
+                if (isPlayingMusic) {
+                    audio.pause();
+                    audio.currentTime = 0;
+                    isPlayingMusic = false;
+                    playBtn.textContent = '▶ ВКЛ';
+                }
+
+                if (radioOn) {
+                    startNoise(0.15);
+                } else {
+                    stopNoise();
+                }
+            }
+        }
+
+        slider.addEventListener('input', updateRadio);
+
+        // Draggable antenna
+        let isDragging = false;
+
+        function startDrag(e) {
+            isDragging = true;
+            e.preventDefault();
+        }
+
+        function onDrag(e) {
+            if (!isDragging) return;
+
+            const rect = antenna.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const deltaX = clientX - centerX;
+            const maxAngle = 45;
+            let angle = Math.max(-maxAngle, Math.min(maxAngle, deltaX * 0.5));
+
+            const freq = ((angle + 45) / 90) * (108 - 87.5) + 87.5;
+            const clampedFreq = Math.max(87.5, Math.min(108, freq));
+
+            slider.value = clampedFreq;
+            updateRadio();
+        }
+
+        function endDrag() {
+            isDragging = false;
+        }
+
+        antennaKnob.addEventListener('mousedown', startDrag);
+        antennaKnob.addEventListener('touchstart', startDrag);
+        document.addEventListener('mousemove', onDrag);
+        document.addEventListener('touchmove', onDrag);
+        document.addEventListener('mouseup', endDrag);
+        document.addEventListener('touchend', endDrag);
+
+        // Click on antenna rod
+        antennaRod.addEventListener('mousedown', startDrag);
+        antennaRod.addEventListener('touchstart', startDrag);
+
+        // Play button
+        playBtn.addEventListener('click', () => {
+            radioOn = !radioOn;
+
+            if (radioOn) {
+                playBtn.textContent = '⏸ ВЫКЛ';
+                playBtn.classList.add('on');
+                updateRadio();
+            } else {
+                playBtn.textContent = '▶ ВКЛ';
+                playBtn.classList.remove('on');
+                audio.pause();
+                audio.currentTime = 0;
+                isPlayingMusic = false;
+                stopNoise();
+                radioStatic.style.opacity = '0';
+            }
+        });
+
+        // Volume
+        volumeSlider.addEventListener('input', () => {
+            audio.volume = volumeSlider.value / 100;
+        });
+
+        // Static noise visual
+        function drawStatic() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 200;
+            canvas.height = 80;
+            const ctx = canvas.getContext('2d');
+
+            function draw() {
+                const imageData = ctx.createImageData(canvas.width, canvas.height);
+                for (let i = 0; i < imageData.data.length; i += 4) {
+                    const v = Math.random() * 80;
+                    imageData.data[i] = v;
+                    imageData.data[i + 1] = v;
+                    imageData.data[i + 2] = v;
+                    imageData.data[i + 3] = 255;
+                }
+                ctx.putImageData(imageData, 0, 0);
+                radioStatic.style.backgroundImage = `url(${canvas.toDataURL()})`;
+                requestAnimationFrame(draw);
+            }
+            draw();
+        }
+
+        drawStatic();
+        updateRadio();
+    </script>
+</body>
+</html>
