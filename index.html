@@ -386,7 +386,7 @@
     </script>
     <script>
         // Timer
-        fetch('timer.json')
+        fetch('timer.json?' + Date.now())
             .then(r => r.json())
             .then(timerData => {
                 const timerBanner = document.getElementById('timerBanner');
